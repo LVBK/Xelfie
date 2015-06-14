@@ -1,5 +1,6 @@
 package lvbk.xsp;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -22,6 +23,7 @@ import lvbk.xsp.Models.User;
 
 public class LoginActivity extends ActionBarActivity {
     public static final String URL = "https://selfieworld.firebaseio.com/";
+    public ProgressDialog pDialog;
     EditText nameTextView;
     EditText passTextView;
     CheckBox chksaveaccount;
@@ -67,6 +69,9 @@ public class LoginActivity extends ActionBarActivity {
                 LoginController loginController = new LoginController();
                 uname = nameTextView.getText().toString();
                 password = passTextView.getText().toString();
+                pDialog = new ProgressDialog(LoginActivity.this);
+                pDialog.setMessage("Please wait...");
+                pDialog.setCancelable(false);
                 loginController.login(uname, password, LoginActivity.this);
             }
         });
@@ -151,8 +156,7 @@ public class LoginActivity extends ActionBarActivity {
         }
     }
     public void makeText(String content){
-        if(!content.equals(""))
-            Toast.makeText(LoginActivity.this, content+"!", Toast.LENGTH_LONG).show();
+            Toast.makeText(LoginActivity.this, content, Toast.LENGTH_LONG).show();
     }
 
 }

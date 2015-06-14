@@ -1,6 +1,7 @@
 package lvbk.xsp;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -12,12 +13,12 @@ import android.widget.Toast;
 import com.firebase.client.Firebase;
 
 import lvbk.xsp.Controllers.SignUpController;
-import lvbk.xsp.Models.User;
 
 /**
  * Created by lvbk on 13/06/2015.
  */
 public class SignUpActivity extends Activity{
+    public ProgressDialog pDialog;
     final Firebase rootRèf = new Firebase(LoginActivity.URL);
     final Firebase userRef = rootRèf.child("Users");
     EditText username, password, confirm;
@@ -61,6 +62,9 @@ public class SignUpActivity extends Activity{
                 uname  = username.getText().toString();
                 pass = password.getText().toString();
                 pass2 = confirm.getText().toString();
+                pDialog = new ProgressDialog(SignUpActivity.this);
+                pDialog.setMessage("Please wait...");
+                pDialog.setCancelable(false);
                 SignUpController signUpController = new SignUpController();
                 signUpController.signUp(uname,pass,pass2,SignUpActivity.this);
             }
@@ -78,17 +82,6 @@ public class SignUpActivity extends Activity{
         });
     }
 
-    public void doSignUp(){
-        Intent intent = new Intent();
-        Bundle bundle = new Bundle();
-        User user = new User(uname, pass);
-        userRef.push().setValue(user);
-        bundle.putString("username", uname);
-        bundle.putString("pass", pass);
-        intent.putExtra("Data", bundle);
-        setResult(RESULT_OK, intent);
-        finish();
-    }
     public void makeText(String content){
             Toast.makeText(SignUpActivity.this, content+"!", Toast.LENGTH_LONG).show();
     }

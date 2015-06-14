@@ -1,6 +1,10 @@
 package lvbk.xsp.Controllers;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 
 import com.firebase.client.DataSnapshot;
@@ -22,7 +26,6 @@ import lvbk.xsp.Models.User;
  * Created by lvbk on 12/06/2015.
  */
 public class LoginController {
-    public String output = "";
     public static final String URL = "https://selfieworld.firebaseio.com/";
     final Firebase rootRef = new Firebase(URL);
     final Firebase userRef = rootRef.child("Users");
@@ -30,9 +33,14 @@ public class LoginController {
 
     }
     public void login(final String uname, final String password,  final LoginActivity loginActivity){
-        if (uname.equals("") || password.equals("")) {
-            output = "Invalid username or password";
-        } else {
+        if (uname.equals(""))
+            loginActivity.makeText("Invalid Username");
+        else if(password.equals(""))
+            loginActivity.makeText("Invalid Password");
+        else if(!haveNetworkConnection(loginActivity))
+            loginActivity.makeText("No Internet Connection");
+        else {
+            loginActivity.pDialog.show();
             Query queryRef = userRef.orderByChild("uname").equalTo(uname);
             queryRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
@@ -43,7 +51,7 @@ public class LoginController {
                         List valueList = new ArrayList(value.values());
                         Map<String, Objects> value2 = (Map<String, Objects>) valueList.get(0);
                         if (password.equals(value2.get("password"))) {
-                            output = "Success login";
+                            loginActivity.pDialog.dismiss();
                             loginActivity.finish();
                             User user = new User(uname, password);
                             Intent intent = new Intent(loginActivity, HomeActivity.class);
@@ -52,14 +60,12 @@ public class LoginController {
                             intent.putExtra("DATA", bundle);
                             loginActivity.startActivity(intent);
                         } else {
-                            System.out.println("wrong pass");
-                            System.out.println("" + password);
-                            System.out.println("" + value.get("password"));
-                            output = "Wrong password";
+                            loginActivity.pDialog.dismiss();
+                            loginActivity.makeText("Wrong Password");
                         }
                     } else {
-                        System.out.println("wrong username");
-                        output = "Wrong username!";
+                        loginActivity.pDialog.dismiss();
+                        loginActivity.makeText("Wrong Username");
                     }
                 }
 
@@ -69,6 +75,23 @@ public class LoginController {
                 }
             });
         }
-        loginActivity.makeText(output);
     }
+    private boolean haveNetworkConnection(Activity activity) {
+        boolean haveConnectedWifi = false;
+        boolean haveConnectedMobile = false;
+
+        ConnectivityManager cm = (ConnectivityManager)activity.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo[] netInfo = cm.getAllNetworkInfo();
+        for (NetworkInfo ni : netInfo) {
+            if (ni.getTypeName().equalsIgnoreCase("WIFI"))
+                if (ni.isConnected())
+                    haveConnectedWifi = true;
+            if (ni.getTypeName().equalsIgnoreCase("MOBILE"))
+                if (ni.isConnected())
+                    haveConnectedMobile = true;
+        }
+        return haveConnectedWifi || haveConnectedMobile;
+    }
+
+
 }
