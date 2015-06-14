@@ -3,18 +3,21 @@ package lvbk.xsp;
 import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.TabHost;
 
 /**
  * Created by lvbk on 12/06/2015.
  */
 public class HomeActivity extends TabActivity{
+    public static final int MENU_LOGOUT = Menu.FIRST;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.t);
-
         TabHost tabHost = getTabHost();
 
         //Khởi tạo tab wall
@@ -47,6 +50,28 @@ public class HomeActivity extends TabActivity{
         tabHost.addTab(camspec); //Thêm tab camera
         tabHost.addTab(notispec); //Thêm tab noti
         tabHost.addTab(mespec);   //Thêm tab me
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        super.onCreateOptionsMenu(menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch(item.getItemId())
+        {
+            case R.id.action_settings:
+                finish();
+                Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
+                startActivity(intent);
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }
 
