@@ -15,7 +15,6 @@ import android.widget.Toast;
 import com.firebase.client.Firebase;
 
 import lvbk.xsp.Controllers.LoginController;
-import lvbk.xsp.Models.User;
 
 /**
  * Created by lvbk on 12/06/2015.
@@ -23,7 +22,7 @@ import lvbk.xsp.Models.User;
 
 public class LoginActivity extends ActionBarActivity {
     public static final String URL = "https://selfieworld.firebaseio.com/";
-    public ProgressDialog pDialog;
+    private ProgressDialog pDialog;
     EditText nameTextView;
     EditText passTextView;
     CheckBox chksaveaccount;
@@ -32,13 +31,19 @@ public class LoginActivity extends ActionBarActivity {
     Button signUpBtn;
     String uname;
     String password;
-    User user;
+
+    public void showDialog(){
+        this.pDialog.show();
+    }
+    public void disMissDialog(){
+        this.pDialog.dismiss();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Firebase.setAndroidContext(this);
-        setContentView(R.layout.login);
+        setContentView(R.layout.activity_login);
         getSupportActionBar().hide();
         final Firebase rootRef = new Firebase(URL);
         final Firebase userRef = rootRef.child("Users");

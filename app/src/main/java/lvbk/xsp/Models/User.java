@@ -14,21 +14,19 @@ public class User implements Serializable {
         setPassword(password);
     }
 
-    public String getUname(){
+    public String getUname() {
         return uname;
     }
 
-
-    public void setUname(String uname){
+    public void setUname(String uname) {
         this.uname = uname;
-
     }
-    public String getPassword(){
+
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password){
+    public void setPassword(String password) {
         this.password = password;
     }
-
 }

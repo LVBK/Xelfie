@@ -39,17 +39,17 @@ public class SignUpController {
         else if(!haveNetworkConnection(signUpActivity))
             signUpActivity.makeText("No Internet Connection");
         else {
-            signUpActivity.pDialog.show();
+            signUpActivity.showDialog();
             Query queryRef = userRef.orderByChild("uname").equalTo(uname);
             queryRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     if(dataSnapshot.getValue()!=null) {
-                        signUpActivity.pDialog.dismiss();
+                        signUpActivity.disMissDialog();
                         signUpActivity.makeText("Username is already");
                     }
                     else {
-                        signUpActivity.pDialog.dismiss();
+                        signUpActivity.disMissDialog();
                         doSignUp(uname,pass,signUpActivity);
                     }
                 }

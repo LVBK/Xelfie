@@ -1,0 +1,5 @@
+<root>
+    <item name='java.io.Serializable'>
+        <annotation name='org.jetbrains.annotations.Nullable' />
+    </item>
+</root>

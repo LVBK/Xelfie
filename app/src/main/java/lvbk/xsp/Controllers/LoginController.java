@@ -20,7 +20,6 @@ import java.util.Objects;
 
 import lvbk.xsp.HomeActivity;
 import lvbk.xsp.LoginActivity;
-import lvbk.xsp.Models.User;
 
 /**
  * Created by lvbk on 12/06/2015.
@@ -40,7 +39,7 @@ public class LoginController {
         else if(!haveNetworkConnection(loginActivity))
             loginActivity.makeText("No Internet Connection");
         else {
-            loginActivity.pDialog.show();
+            loginActivity.showDialog();
             Query queryRef = userRef.orderByChild("uname").equalTo(uname);
             queryRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
@@ -51,20 +50,22 @@ public class LoginController {
                         List valueList = new ArrayList(value.values());
                         Map<String, Objects> value2 = (Map<String, Objects>) valueList.get(0);
                         if (password.equals(value2.get("password"))) {
-                            loginActivity.pDialog.dismiss();
+                            loginActivity.disMissDialog();;
                             loginActivity.finish();
-                            User user = new User(uname, password);
                             Intent intent = new Intent(loginActivity, HomeActivity.class);
                             Bundle bundle = new Bundle();
-                            bundle.putSerializable("user", user);
+                            for(Object key: value.keySet()) {
+                                bundle.putString("key",key.toString());
+                            }
+                            bundle.putString("uname", uname);
                             intent.putExtra("DATA", bundle);
                             loginActivity.startActivity(intent);
                         } else {
-                            loginActivity.pDialog.dismiss();
+                            loginActivity.disMissDialog();
                             loginActivity.makeText("Wrong Password");
                         }
                     } else {
-                        loginActivity.pDialog.dismiss();
+                        loginActivity.disMissDialog();
                         loginActivity.makeText("Wrong Username");
                     }
                 }

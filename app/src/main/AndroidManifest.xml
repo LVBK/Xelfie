@@ -22,9 +22,13 @@
         <activity android:screenOrientation="portrait" android:name=".HomeActivity"></activity>
         <activity android:screenOrientation="portrait" android:name=".WallActivity"></activity>
         <activity android:screenOrientation="portrait" android:name=".CamActivity"></activity>
-        <activity android:screenOrientation="portrait" android:name=".NotiActivity"></activity>
-        <activity android:screenOrientation="portrait" android:name=".MeActivity"></activity>
+        <activity android:screenOrientation="portrait" android:name=".FollowActivity"></activity>
+        <activity android:screenOrientation="portrait" android:name=".UserActivity"></activity>
         <activity android:screenOrientation="portrait" android:name=".SignUpActivity"></activity>
+        <activity android:screenOrientation="portrait" android:name=".ImageActivity"></activity>
+        <activity android:screenOrientation="portrait" android:name=".FollowingActivity"></activity>
+        <activity android:screenOrientation="portrait" android:name=".FollowableActivity"></activity>
+        <activity android:screenOrientation="portrait" android:name=".CommentActivity"></activity>
     </application>
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />

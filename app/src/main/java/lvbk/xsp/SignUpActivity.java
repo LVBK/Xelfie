@@ -18,16 +18,24 @@ import lvbk.xsp.Controllers.SignUpController;
  * Created by lvbk on 13/06/2015.
  */
 public class SignUpActivity extends Activity{
-    public ProgressDialog pDialog;
+    private ProgressDialog pDialog;
     final Firebase rootRèf = new Firebase(LoginActivity.URL);
     final Firebase userRef = rootRèf.child("Users");
     EditText username, password, confirm;
     String uname, pass, pass2;
     Button signUpBtn, cancelBtn;
+
+    public void showDialog(){
+        pDialog.show();
+    }
+
+    public void disMissDialog(){
+        pDialog.dismiss();
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.signup);
+        setContentView(R.layout.activity_signup);
         username = (EditText)findViewById(R.id.username);
         password = (EditText)findViewById(R.id.password);
         confirm = (EditText)findViewById(R.id.confirm);

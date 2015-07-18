@@ -15,7 +15,7 @@
             android:orientation="horizontal"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
-            android:layout_weight="0.7">
+            android:layout_weight="0.55">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -32,7 +32,7 @@
         <ImageButton
             android:layout_width="0dp"
             android:layout_height="fill_parent"
-            android:id="@+id/button1"
+            android:id="@+id/btnTake"
             android:layout_gravity="left|center_vertical"
             android:layout_weight="0.15"
             android:background="@drawable/ic_camera"
@@ -45,10 +45,23 @@
         <ImageButton
             android:layout_width="0dp"
             android:layout_height="fill_parent"
-            android:id="@+id/imageButton6"
+            android:id="@+id/btnUpload"
             android:layout_gravity="top|center_vertical"
             android:layout_weight="0.15"
             android:background="@drawable/ic_upload"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_margin="15dp" />
+
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:id="@+id/btnSetAvatar"
+            android:layout_gravity="top|center_vertical"
+            android:layout_weight="0.15"
+            android:background="@drawable/ic_account_circle"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="15dp"
             android:layout_marginTop="5dp"
@@ -62,7 +75,7 @@
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="0.85"
-        android:background="#FFFFFF">
+        android:background="@drawable/ic_account">
 
         <ImageView
             android:id="@+id/imageView1"

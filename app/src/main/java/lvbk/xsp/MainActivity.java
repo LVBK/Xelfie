@@ -16,7 +16,7 @@ public class MainActivity extends ActionBarActivity {
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.start);
+        setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
         runnable=new Runnable() {
 
@@ -29,6 +29,7 @@ public class MainActivity extends ActionBarActivity {
                     Log.v(TAG,"Going to wake up...");
                     Intent intent=new Intent(MainActivity.this, LoginActivity.class);
                     startActivity(intent);
+                    finish();
 
                 }
                 catch(Exception e)

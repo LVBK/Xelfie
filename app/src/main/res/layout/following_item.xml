@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_gravity="center_horizontal"
+        android:descendantFocusability="blocksDescendants"
+        android:background="#FFFFFF">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:text="New Text"
+            android:id="@+id/uname"
+            android:layout_weight="0.65"
+            android:gravity="center_vertical|center_horizontal"
+            android:textSize="25dp"
+            android:textColor="#123456" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.35"
+            android:layout_gravity="right"
+            android:padding="10dp">
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Unfollow"
+                android:id="@+id/btnUnfollow"
+                android:layout_gravity="center_vertical"
+                android:background="#123456"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:layout_weight="0" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
